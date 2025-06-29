@@ -248,8 +248,42 @@ This dataset was provided by [Swipestats.io](https://www.swipestats.io/).
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
+```{r}
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received)) +
+    geom_point()
+```
 
+```{r}
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
+  geom_point()
+```
+
+```{r}
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received)
+    ) +
+    geom_point() +
+    facet_wrap(~user_gender)
+```
+
+```{r}
+ggplot(tinder_data, aes(x = messages_sent, group = user_gender)) +
+  geom_histogram()
+```
+
+```{r}
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  geom_abline()
+```
+
+```{r}
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  geom_abline() +
+  coord_fixed()
+```
 :::
 
 ## Graduate Challenge
