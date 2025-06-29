@@ -67,7 +67,7 @@ There are 3 particularly important components to our template for building a gra
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
+A **geom** defines the geometrical object which represents data, such as a bar, line, boxplot, or point. An **aesthetic mapping** defines how variables in a given dataset are mapped to visual properties, such as designating which variables will map to x and y axes.
 
 :::
 
@@ -77,9 +77,14 @@ Construct a scatterplot of `hwy` versus `cty` using the `mpg` dataset. What is t
 
 ::: {.callout-tip icon="false"}
 ## Solution
+```{r}
+ggplot(data  = mpg,
+       mapping = aes( x = hwy, y = cty)
+    ) +
+      geom_point()
+```
 
-YOUR SOLUTION HERE
-
+This plot is generally vague in what it actually depicts. Any further relationships between individual city mpg levels, hwy mpg, and car type is obscured by the apparent positive linear relationship. We could try sorting by some detail about the cars-- year, manufacturer, model, etc, to explore whether there are further relationships.
 :::
 
 
@@ -92,8 +97,17 @@ Now construct a scatterplot of `hwy` versus `cty`. Set the color of the points t
 
 ::: {.callout-tip icon="false"}
 ## Solution
-
-YOUR SOLUTION HERE
+```{r}
+ggplot(mpg, aes(x = hwy, y = cty, color = drv)
+       ) +
+  geom_point ()
+```
+```{r}
+ggplot(mpg, aes(x = hwy, y = cty)
+       ) +
+  geom_point(color = "slateblue") +
+  facet_wrap(~drv)
+```
 
 :::
 
@@ -102,7 +116,7 @@ What are the advantages to using faceting instead of the color aesthetic? What a
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
+Using too many aesthetic mappings can make a plot overly busy and cluttered. Using facets allows us to focus on subsets of the data rather than squishing all of that information into one graph. However, a larger dataset might become difficult to read, visually compressing any smaller differences and becoming cluttered with so many separate graphs.   
 
 :::
 
@@ -113,7 +127,32 @@ Construct a scatterplot of `hwy` vs `cty`. Next, map a third numerical variable 
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
+```{r}
+ggplot(mpg, aes(x = hwy, y = cty, color = displ)) +
+  geom_point()
+```
+```{r}
+# one option looking at year and displ
+ggplot(mpg, aes(x = hwy, y = cty, color = year, size = displ)) +
+  geom_point()
+```
+```{r}
+# another option just looking at size = displ
+ggplot(mpg, aes(x = hwy, y = cty, size = displ)) +
+  geom_point()
+```
+
+```{r}
+# shape does not work for continuous data
+ggplot(mpg, aes(x = hwy, y = cty, color = year, shape = drv)) +
+  geom_point()
+```
+```{r}
+#  option with shape = displ, a numerical variable, which gives an error because it is a continuous variable.
+# ggplot(mpg, aes(x = hwy, y = cty, shape = displ)) +
+#  geom_point()
+```
+
 
 :::
 
@@ -122,7 +161,7 @@ How do the aesthetics behave differently for categorical versus numerical variab
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
+Shape does not work for continuous numeric data, because you would need an infinite number of shapes to represent the numbers. We can potentially avoid this problem using bins. Size and color may fluctuate on a gradient scale according to numeric data, or they can be discrete representations according to categorical data.  
 
 :::
 
@@ -133,7 +172,15 @@ Construct a histogram of the `carat` variable in the `diamonds` dataset. Adjust 
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
+```{r}
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(binwidth = 0.20) +
+  labs(
+    title = "Number of Diamonds by Carat",
+    caption = "Source: ggplot2 package",
+    y = ""
+  )
+```
 
 :::
 
@@ -144,8 +191,14 @@ Construct 2 appropriate graphics to show the relationship between `carat` and `c
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
-
+```{r}
+ggplot(diamonds, aes(x = cut, y = carat)) +
+  geom_boxplot()
+```
+```{r}
+ggplot(diamonds, aes(x = carat, color = cut, fill = cut)) +
+  geom_density(alpha = 0.5)
+```
 :::
 
 ### Exercise 7
@@ -156,7 +209,11 @@ Construct a barplot of `cut`. Add in `aes(fill = carat > 0.7)`.
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
+```{r}
+# did not use position = "fill" because I still wanted to see total count #
+ggplot(diamonds, aes(x = cut, fill = carat > 0.7)) +
+  geom_bar()
+```
 
 :::
 
@@ -167,9 +224,10 @@ When would you use `facet_grid()` versus `facet_wrap()`? When using `facet_grid(
 ::: {.callout-tip icon="false"}
 ## Solution
 
-YOUR SOLUTION HERE
-
+'facet_grid()' is most useful with two discrete variables. One variable with many levels works better with 'facet_wrap()'. I think putting the variable with more unique levels in the columns is related to scale, as the more unique levels one variable has, the more "empty space" will be present in the other variable's graphical space.
 :::
+
+```
 
 
 ## Case Study
