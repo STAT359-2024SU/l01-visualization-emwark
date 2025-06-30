@@ -297,7 +297,7 @@ ggplot(tinder_data, aes(x = messages_sent,
   geom_smooth() +
   coord_fixed(ratio = 1) +
   labs(
-    title = "Messages Sent by Gender and Gender Interest"
+    title = "Messages Sent and Received by Gender"
     )
 ```
 :::
