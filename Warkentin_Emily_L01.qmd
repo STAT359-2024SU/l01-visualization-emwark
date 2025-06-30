@@ -79,12 +79,18 @@ Construct a scatterplot of `hwy` versus `cty` using the `mpg` dataset. What is t
 ## Solution
 ```{r}
 ggplot(data  = mpg,
-       mapping = aes( x = hwy, y = cty)
-    ) +
+       mapping = aes( x = hwy, y = cty)) +
       geom_point()
 ```
 
-This plot is generally vague in what it actually depicts. Any further relationships between individual city mpg levels, hwy mpg, and car type is obscured by the apparent positive linear relationship. We could try sorting by some detail about the cars-- year, manufacturer, model, etc, to explore whether there are further relationships.
+This scatterplot is generally vague in what it actually depicts--the number of points are obscured because several entries contain the same values. The data is *overplotted*. We can improve this by jittering the points.
+
+```{r}
+ggplot(data  = mpg,
+       mapping = aes( x = hwy, y = cty)) +
+  geom_jitter(alpha = 0.2)
+```
+
 :::
 
 
@@ -281,8 +287,7 @@ ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_g
 ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
   geom_point() +
   geom_smooth(method = "lm") +
-  geom_abline() +
-  coord_fixed()
+  geom_abline()
 ```
 :::
 
