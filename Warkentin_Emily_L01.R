@@ -146,14 +146,21 @@ ggplot(diamonds, aes(x = cut, fill = carat > 0.7)) +
 ggplot(tinder_data, aes(x = messages_sent, y = messages_received)) +
   geom_jitter(alpha = 0.25)
 
+ggsave(filename = "plots/jitter_message_nogender.png")
+
 ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
   geom_jitter(alpha = 0.25)
+
+
+ggsave(filename = "plots/jitter_message_gender")
 
 # try facet
 ggplot(tinder_data, aes(x = messages_sent, y = messages_received)
 ) +
   geom_jitter(alpha = 0.25) +
   facet_wrap(~user_gender)
+
+ggsave(filename = "plots/jitter_message_genderfacet")
 
 # add abline
 
@@ -172,6 +179,8 @@ ggplot(tinder_data, aes(x = messages_received)) +
 ggplot(tinder_data, aes(x = messages_received)) +
   geom_histogram(binwidth = 500) +
   facet_wrap(~user_gender)
+
+ggsave(filename = "plots/message_received_gender")
 
 # color 
 ggplot(tinder_data, aes(x = messages_received, color = user_gender)) +
