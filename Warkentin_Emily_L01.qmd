@@ -188,7 +188,7 @@ ggplot(diamonds, aes(x = carat)) +
   labs(
     title = "Number of Diamonds by Carat",
     caption = "Source: ggplot2 package",
-    y = ""
+    y = NULL
   )
 ```
 
@@ -197,6 +197,8 @@ ggplot(diamonds, aes(x = carat)) +
 ### Exercise 6
 
 Construct 2 appropriate graphics to show the relationship between `carat` and `cut`. 
+
+
 
 ::: {.callout-tip icon="false"}
 ## Solution

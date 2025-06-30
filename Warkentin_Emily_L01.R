@@ -103,3 +103,32 @@ ggplot(diamonds, aes(x = carat)) +
     caption = "Source: ggplot2 package",
     y = ""
   )
+ 
+# get rid of empty space with y = NULL
+
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(binwidth = 0.20) +
+  labs(
+    title = "Number of Diamonds by Carat",
+    caption = "Source: ggplot2 package",
+    y = ""
+  )
+
+
+# Ex 6
+# plotting carat versus cut in diamonds
+# carat is numeric, cut is categorical
+
+# option 1 boxplot
+ggplot(diamonds, aes(x = cut, y = carat)) +
+  geom_boxplot()
+
+# option 2 density
+ggplot(diamonds, aes(x = carat, color = cut, fill = cut)) +
+  geom_density(alpha = 0.5)
+
+# could also use histogram with facet
+
+
+
+
