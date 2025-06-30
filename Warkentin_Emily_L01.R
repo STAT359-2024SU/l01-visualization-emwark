@@ -19,36 +19,59 @@ tinder_data <- read_csv("data/tinder_data.csv")
 # scatterplot of 'hwy' v 'cty' using mpg set
 
 ggplot(data  = mpg,
-       mapping = aes( x = hwy, y = cty)) +
+       mapping = aes( x = cty, y = hwy)) +
   geom_point()
 
 ggplot(data  = mpg,
-       mapping = aes( x = hwy, y = cty)) +
+       mapping = aes( x = cty, y = hwy)) +
   geom_point(alpha = 0.2)
 # alpha attempt to solve overplotting issues
 
-ggplot(data  = mpg,
-       mapping = aes( x = hwy, y = cty)) +
+ggplot(mpg, aes( x = cty, y = hwy)) +
   geom_jitter(alpha = 0.2)
 # geom_jitter instead of geom_point 
 
 # Ex 3
 #scatterplot of 'hwy' v 'cty' with color of points to 'drv'
-ggplot(mpg, aes(x = hwy, y = cty, color = drv)
-) +
+ggplot(mpg, aes(x = cty, y = hwy, color = drv)) +
   geom_point ()
-ggplot(mpg, aes(x = hwy, y = cty, color = drv)
-) +
+ggplot(mpg, aes(x = cty, y = hwy, color = drv)) +
   geom_jitter(alpha = 0.2)
 # scatterplot of `hwy` versus `cty` w/ color of the points favorite color 
 # `facet` by `drv`. Read `?facet_wrap` and adjust the `ncol` and `scales` as necessary.
 
-ggplot(mpg, aes(x = hwy, y = cty)
-) +
+# add color
+ggplot(mpg, aes(x = cty, y = hwy)) +
   geom_point(color = "slateblue") +
   facet_wrap(~drv)
 
-ggplot(mpg, aes(x = hwy, y = cty)
-) +
+# add jitter 
+ggplot(mpg, aes(x = cty, y = hwy)) +
   geom_jitter(alpha = 0.2, color = "slateblue") +
   facet_wrap(~drv)
+
+# Ex 4
+#  mapping numeric to 'color', 'size', 'shape'
+#color
+
+ggplot(mpg, aes(x = cty, y = hwy, color = displ)) +
+  geom_point()
+
+# size
+ggplot(mpg, aes(x = cty, y = hwy, size = displ)) +
+  geom_point()
+
+# shape
+# ggplot(mpg, aes(x = cty, y = hwy, shape = displ)) +
+# geom_point()
+# error
+
+# mapping categorical to color, size, shape
+
+ggplot(mpg, aes(x = cty, 
+                y = hwy, 
+                color = trans,
+                shape = trans,
+                size = trans)) +
+  geom_point()
+# continuous var should not map to shape
