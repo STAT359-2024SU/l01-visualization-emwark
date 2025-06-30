@@ -173,10 +173,67 @@ ggplot(tinder_data, aes(x = messages_received)) +
   geom_histogram(binwidth = 500) +
   facet_wrap(~user_gender)
 
+# color 
+ggplot(tinder_data, aes(x = messages_received, color = user_gender)) +
+  geom_histogram(binwidth = 500)
+
+ggplot(tinder_data, aes(x = messages_received, color = user_gender)) +
+  geom_density(binwidth = 500)
+  # coord_fixed(ratio = 1)
+# coord_fixed doesn't work here or I am not understanding
+
+# boxplot
+
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received)) +
+  geom_boxplot() 
+
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received)) +
+  geom_boxplot() +
+  facet_wrap(~user_gender)
+  
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received)) +
+  geom_violin() +
+  facet_wrap(~user_gender) +
+  coord_fixed(ratio = 1)
+
+# trying scatter again
+ggplot(tinder_data, aes(x = messages_sent, 
+                        y = messages_received,
+                        color = user_interested_in,
+                        size = median_convo_length_msgs)
+) +
+  geom_jitter(alpha = 0.25) +
+  facet_wrap(~user_gender) +
+  geom_abline() +
+  coord_fixed(ratio = 2)
+
+# trying scatter again
+ggplot(tinder_data, aes(x = messages_sent, 
+                        y = messages_received)
+) +
+  geom_jitter(aes(color = user_gender), alpha = 0.25) +
+  facet_wrap(~user_gender) +
+  geom_smooth() +
+  coord_fixed(ratio = 1) +
+  labs(
+    title = "Messages Sent by Gender and Gender Interest"
+    )
 
 
+# trying scatter again
+ggplot(tinder_data, aes(x = messages_sent, 
+                        y = messages_received,
+                        color = user_gender)
+) +
+  geom_jitter( alpha = 0.25) +
+  geom_smooth() +
+  coord_fixed(ratio = 1) +
+  labs(
+    title = "Messages Sent by Gender and Gender Interest"
+  )
 
-
+ggsave(filename = "plots/dist_message_gender.png")
+       
 # saving a file
 
 # ggsave(filename = "plots/dist_message_received.png")
