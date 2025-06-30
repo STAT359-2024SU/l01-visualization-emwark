@@ -239,8 +239,6 @@ When would you use `facet_grid()` versus `facet_wrap()`? When using `facet_grid(
 'facet_grid()' is most useful with two discrete variables. One variable with many levels works better with 'facet_wrap()'. I think putting the variable with more unique levels in the columns is related to scale, as the more unique levels one variable has, the more "empty space" will be present in the other variable's graphical space.
 :::
 
-```
-
 
 ## Case Study
 
@@ -260,40 +258,36 @@ This dataset was provided by [Swipestats.io](https://www.swipestats.io/).
 ::: {.callout-tip icon="false"}
 ## Solution
 
+Comparing messages sent to messages received, we see a pretty positive linear relationship. However, there is a lot more to the story.
+
+
 ```{r}
+#| echo: false
 ggplot(tinder_data, aes(x = messages_sent, y = messages_received)) +
-    geom_point()
+    geom_jitter(alpha = 0.25)
 ```
 
+Simply separating by gender, we see that many of the larger outliers appear to be male.
+
 ```{r}
+#| echo: false
 ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
-  geom_point()
+  geom_jitter(alpha = 0.25)
 ```
 
+We can view these differences more easily by making separate visuals per gender. Here, we can find a little more clarity between gender category. However, it is still difficult to really discern anything valuable here.
+
 ```{r}
+#| echo: false
 ggplot(tinder_data, aes(x = messages_sent, y = messages_received)
-    ) +
-    geom_point() +
-    facet_wrap(~user_gender)
+) +
+  geom_jitter(alpha = 0.25) +
+  facet_wrap(~user_gender)
 ```
 
-```{r}
-ggplot(tinder_data, aes(x = messages_sent, group = user_gender)) +
-  geom_histogram()
-```
 
 ```{r}
-ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  geom_abline()
-```
 
-```{r}
-ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  geom_abline()
 ```
 :::
 

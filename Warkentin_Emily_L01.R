@@ -129,6 +129,61 @@ ggplot(diamonds, aes(x = carat, color = cut, fill = cut)) +
 
 # could also use histogram with facet
 
+# Ex 7
+# Construct a barplot of `cut`. Add in `aes(fill = carat > 0.7)`.
+
+# did not use position = "fill" because I still wanted to see total count #
+ggplot(diamonds, aes(x = cut, fill = carat > 0.7)) +
+  geom_bar()
+
+# Ex 8 
+# facet_grid()vs facet_wrap()
+
+# Case Study
+# messages sent v messages received geom_point
+
+# scatter plot
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received)) +
+  geom_jitter(alpha = 0.25)
+
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received, color = user_gender )) +
+  geom_jitter(alpha = 0.25)
+
+# try facet
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received)
+) +
+  geom_jitter(alpha = 0.25) +
+  facet_wrap(~user_gender)
+
+# add abline
+
+ggplot(tinder_data, aes(x = messages_sent, y = messages_received)
+) +
+  geom_jitter(alpha = 0.25) +
+  facet_wrap(~user_gender) +
+  geom_abline()
+
+# try received with histogram
+ggplot(tinder_data, aes(x = messages_received)) +
+  geom_histogram(binwidth = 500)
+
+# add facet_wrap
+
+ggplot(tinder_data, aes(x = messages_received)) +
+  geom_histogram(binwidth = 500) +
+  facet_wrap(~user_gender)
+
+
+
+
+
+# saving a file
+
+# ggsave(filename = "plots/dist_message_received.png")
+# this will save the last plot ran
+
+
+
 
 
 
