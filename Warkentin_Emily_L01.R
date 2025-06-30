@@ -75,3 +75,31 @@ ggplot(mpg, aes(x = cty,
                 size = trans)) +
   geom_point()
 # continuous var should not map to shape
+
+# Ex 5
+# histogram of the `carat` variable in the `diamonds` dataset w adjustments
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(binwidth = 200) +
+  labs(
+    title = "Number of Diamonds by Carat",
+    caption = "Source: ggplot2 package",
+    y = ""
+  )
+# binwidth 200 too large
+
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(binwidth = 20) +
+  labs(
+    title = "Number of Diamonds by Carat",
+    caption = "Source: ggplot2 package",
+    y = ""
+  )
+# still too large. looking at actual data, this should be obvious
+
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(binwidth = 0.20) +
+  labs(
+    title = "Number of Diamonds by Carat",
+    caption = "Source: ggplot2 package",
+    y = ""
+  )
